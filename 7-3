@@ -1,0 +1,50 @@
+Console.WriteLine("Hello, World!");
+
+using System;
+using System.collection.Generic;
+
+
+public class Product // product online shopign list
+{
+    public string ProductID { get; set; }
+    public string ProductName { get; set; }
+    public double Price { get; set; }
+
+    public Product(string productId, string productName, double price)
+    {
+        ProductID = productId;
+        ProductName = productName;
+        Price = price;
+    }
+
+}
+
+public class ShoppingCart //shoppingcart 
+{
+    private List<Product> cartItems = new List<Product>();
+
+    public void addProduct(Product product) // add the product
+    {
+        cartItems.Add(product);
+    }
+
+    public void REmoveProduct(string productId) // remove the product
+    {
+        var productToRemove = cartItems.FirstOrDefault(p => p.ProductID == productId);
+        if (productToRemove != null)
+        {
+            cartItems.Remove(productToRemove);
+        }
+    }
+
+    public double CalculateTotalPrice() //total price of the item
+    {
+        double totalPrice = 0;
+        foreach (var item in cartItems)
+        {
+            totalPrice += item.Price;
+        }
+        return totalPrice;
+    }
+
+}
